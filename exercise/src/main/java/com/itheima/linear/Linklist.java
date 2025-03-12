@@ -111,6 +111,93 @@ public class Linklist<T> implements Iterable<T> {
         return -1;
     }
 
+    //将整个链表反转
+    public void reverse(){
+        if(N==0){
+            return;
+        }
+
+        reverse2(head.next);
+    }
+
+    //反转单个节点
+    //使用递归
+    public Node reverse2(Node node){
+        //递归返回条件
+        //如果已经到了最后一个节点
+        if(node.next==null){
+            //反转后头节点指向末节点
+            head.next=node;
+            return node;
+        }
+
+        //通过反转寻找当前节点的下一个节点;返回值就是链表反转后当前节点的前驱节点
+        Node pre = reverse2(node.next);
+        pre.next = node;
+        //该节点指向前驱节点实现反转
+        node.next = null;
+        //返回当前的节点
+        return node;
+    }
+
+    /**
+     * * @param first 链表的首结点
+     * * @return 链表的中间结点的值
+     */
+
+    public static String getMid(Node<String> first) {
+        Node<String> fast = first;
+        Node<String> slow = first;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.item;
+    }
+
+    public static Node getMeetNode(Node<String> first) {
+        Node<String> fast = first;
+        Node<String> slow = first;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast.equals(slow)){
+                return slow;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isCycle(Node<String> first){
+        Node<String> fast = first;
+        Node<String> slow = first;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast.equals(slow)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 查找有环链表中环的入口结点
+     * @param first 链表首结点
+     * @return 环的入口结点
+     */
+    public static Node getEntrance(Node<String> first) {
+        Node<String> pointer = first;
+        System.out.println("寻找入口");
+        Node<String> slow = getMeetNode(first);
+        System.out.println(slow.item);
+        while(!pointer.equals(slow)){
+            pointer = pointer.next;
+            slow = slow.next;
+        }
+        return pointer;
+    }
+
 
     public static void main(String[] args) {
         Linklist<String> list = new Linklist<>();
@@ -135,6 +222,56 @@ public class Linklist<T> implements Iterable<T> {
         for (String s : list) {
             System.out.println(s);
         }
+
+
+        System.out.println("------------------------");
+        System.out.println("测试链表反转");
+
+
+        Linklist<Integer> list2 = new Linklist<>();
+        list2.insert(1);
+        list2.insert(2);
+        list2.insert(3);
+        list2.insert(4);
+        for (Integer i : list2) {
+            System.out.print(i+" ");
+        }
+        System.out.println();
+        System.out.println("--------------------");
+        list2.reverse();
+        for (Integer i : list2) {
+            System.out.print(i+" ");
+        }
+        System.out.println();
+        System.out.println("--------------------");
+
+        Node<String>first = new Node<String>("aa",null);
+        Node<String> second = new Node<String>("bb", null);
+        Node<String> third = new Node<String>("cc", null);
+        Node<String> fourth = new Node<String>("dd", null);
+        Node<String> fifth = new Node<String>("ee", null);
+        Node<String> six = new Node<String>("ff", null);
+        Node<String> seven = new Node<String>("gg",null);
+
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = six;
+        six.next = seven;
+
+        //产生环
+        seven.next = third;
+        //查找中间值
+//        String mid = getMid(first);
+//        System.out.println("中间值为："+mid);
+
+        boolean isCycle = isCycle(first);
+        System.out.println("first链表中是否有环："+isCycle);
+
+        //查找环的入口结点
+        Node<String> entrance = getEntrance(first);
+        System.out.println("first链表中环的入口结点元素为："+entrance.item);
     }
 
     @Override

@@ -143,6 +143,8 @@ public class TwoWaysLinkList<T> implements Iterable<T> {
     }
 
 
+
+
     public static void main(String[] args) {
 
         TwoWaysLinkList<String> list = new TwoWaysLinkList<>();
