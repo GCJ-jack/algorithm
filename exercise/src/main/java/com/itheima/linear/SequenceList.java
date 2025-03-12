@@ -1,6 +1,8 @@
 package com.itheima.linear;
 
-public class SequenceList<T> {
+import java.util.Iterator;
+
+public class SequenceList<T> implements Iterable<T> {
 
     //储存数据的数组
     private T[] eles;
@@ -40,7 +42,7 @@ public class SequenceList<T> {
     //向数组中插入元素
     public void insert(T v){
         if(size==eles.length){
-            throw new RuntimeException("当前数组以满");
+            resize(eles.length*2);
         }
         eles[size++]=v;
     }
@@ -49,7 +51,7 @@ public class SequenceList<T> {
     public void insert(int i,T v){
 
         if(i==eles.length){
-            throw new  RuntimeException("当前数组以满");
+            resize(eles.length*2);
         }
 
         if(i>size||i<0){
@@ -70,7 +72,7 @@ public class SequenceList<T> {
 
     //删除指定位置的元素，并把后续的元素向前移动
     public T delete(int i){
-        if(i>=size||i<0){
+        if(i>size-1||i<0){
             throw new RuntimeException("删除的位置不合理");
         }
 
@@ -78,12 +80,18 @@ public class SequenceList<T> {
         T number = eles[i];
 
         //指定位置之后的元素都向前移动一位
-        for(int j=i+1;j<size-1;j++){
+        for(int j=i;j<size-1;j++){
             eles[j]=eles[j+1];
         }
 
         //当前的元素减1
         size--;
+
+        //如果当前现有的元素的数量已经不足容量的四分之一
+        //进行缩容
+        if(size > 0 &&size<eles.length/4){
+            resize(eles.length/2);
+        }
 
         return number;
     }
@@ -102,6 +110,43 @@ public class SequenceList<T> {
         }
 
         return -1;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new SIterator();
+    }
+
+    private class SIterator implements Iterator{
+
+        private int cur;
+        public SIterator(){
+            this.cur=0;
+        }
+        @Override
+        public boolean hasNext() {
+            return cur<size;
+        }
+        @Override
+        public T next() {
+            return eles[cur++];
+        }
+    }
+
+    //改变容量
+    private void resize(int newsize) {
+        //创造临时数组来记录当前的元素
+        T[] temp = eles;
+        //扩容
+        eles = (T[])new Object[newsize];
+
+        for(int i=0;i<size;i++){
+            eles[i]=temp[i];
+        }
+    }
+
+    public int capacity(){
+        return eles.length;
     }
 
     public static void main(String[] args) {
@@ -128,8 +173,26 @@ public class SequenceList<T> {
         System.out.println("删除的元素是："+removeResult);
 
         //测试清空
-        sequenceList.clear();
+//        sequenceList.clear();
+//
+//        System.out.println("清空后的线性表中的元素个数为:"+sequenceList.length());
 
-        System.out.println("清空后的线性表中的元素个数为:"+sequenceList.length());
+
+        for(String name:sequenceList){
+            System.out.println(name);
+        }
+
+        sequenceList.insert("卡卡罗特");
+        sequenceList.insert("贝吉塔");
+        sequenceList.insert("弗利沙");
+        sequenceList.insert("卡卡罗特");
+        sequenceList.insert("贝吉塔");
+        sequenceList.insert("弗利沙");
+        sequenceList.insert("卡卡罗特");
+        sequenceList.insert("贝吉塔");
+        sequenceList.insert("弗利沙");
+
+        System.out.println(sequenceList.capacity());
+
     }
 }
