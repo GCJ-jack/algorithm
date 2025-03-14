@@ -279,25 +279,50 @@ public class Linklist<T> implements Iterable<T> {
         Node<Integer> first = null;
         //当前节点的上一个节点
         Node<Integer> pre = null;
+        //创立环状节点
         for(int i = 1;i<=41;i++){
-            //第一个元素
+            //第一个节点
             if(i==1){
                 first = new Node<>(i,null);
                 pre = first;
                 continue;
             }
-            Node<Integer> newNode = new Node<>(i,null);
-            pre.next = newNode;
-            pre = newNode;
-            //最后一个节点
+            //后续节点
+            Node<Integer> next = new Node<>(i,null);
+            pre.next = next;
+            pre = next;
+
+            //遍历到最后一个节点的时候
+            //构建环形链表
             if(i==41){
-                pre.next = first;
+                next.next = first;
             }
         }
-        //count计数器，模拟报数
+
+        //使用count来计数判断当前的节点是否需要自杀
         int count = 0;
-        //当前节点
-        Node<Integer> current = first;
+        //记录当前节点以及前驱节点
+        //从首节点先开始
+        Node<Integer> n = first;
+        Node<Integer> before = null;
+        while(n!=n.next){
+            //利用计数 当计数等于3的时候当前的节点执行自杀
+            count++;
+            if(count==3){
+                //自杀相当于直接删除这个节点
+                //前驱节点直接连接到当前节点的后续节点
+                before.next = n.next;
+                //顺便清空计数
+                count = 0;
+                n = n.next;
+            }else{
+                before = n;
+                n = n.next;
+            }
+        }
+
+        //打印出最后的幸存者
+        System.out.println(n.item);
         
     }
 
