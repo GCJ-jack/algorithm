@@ -200,78 +200,105 @@ public class Linklist<T> implements Iterable<T> {
 
 
     public static void main(String[] args) {
-        Linklist<String> list = new Linklist<>();
-        list.insert(0, "张三");
-        list.insert(1, "李四");
-        list.insert(2, "王五");
-        list.insert(3, "赵六");
-        //测试length方法
-        for (String s : list) {
-            System.out.println(s);
+//         Linklist<String> list = new Linklist<>();
+//         list.insert(0, "张三");
+//         list.insert(1, "李四");
+//         list.insert(2, "王五");
+//         list.insert(3, "赵六");
+//         //测试length方法
+//         for (String s : list) {
+//             System.out.println(s);
+//         }
+//         System.out.println(list.length());
+//         System.out.println("------------------- ");
+//         //测试get方法
+//         System.out.println(list.get(2));
+//         System.out.println("------------------------");
+//         //测试remove方法
+//         String remove = list.remove(1);
+//         System.out.println(remove);
+//         System.out.println(list.length());
+//         System.out.println("----------------");
+//         for (String s : list) {
+//             System.out.println(s);
+//         }
+
+
+//         System.out.println("------------------------");
+//         System.out.println("测试链表反转");
+
+
+//         Linklist<Integer> list2 = new Linklist<>();
+//         list2.insert(1);
+//         list2.insert(2);
+//         list2.insert(3);
+//         list2.insert(4);
+//         for (Integer i : list2) {
+//             System.out.print(i+" ");
+//         }
+//         System.out.println();
+//         System.out.println("--------------------");
+//         list2.reverse();
+//         for (Integer i : list2) {
+//             System.out.print(i+" ");
+//         }
+//         System.out.println();
+//         System.out.println("--------------------");
+
+//         Node<String>first = new Node<String>("aa",null);
+//         Node<String> second = new Node<String>("bb", null);
+//         Node<String> third = new Node<String>("cc", null);
+//         Node<String> fourth = new Node<String>("dd", null);
+//         Node<String> fifth = new Node<String>("ee", null);
+//         Node<String> six = new Node<String>("ff", null);
+//         Node<String> seven = new Node<String>("gg",null);
+
+//         first.next = second;
+//         second.next = third;
+//         third.next = fourth;
+//         fourth.next = fifth;
+//         fifth.next = six;
+//         six.next = seven;
+
+//         //产生环
+//         seven.next = third;
+//         //查找中间值
+// //        String mid = getMid(first);
+// //        System.out.println("中间值为："+mid);
+
+//         boolean isCycle = isCycle(first);
+//         System.out.println("first链表中是否有环："+isCycle);
+
+//         //查找环的入口结点
+//         Node<String> entrance = getEntrance(first);
+//         System.out.println("first链表中环的入口结点元素为："+entrance.item);
+
+        //解决约瑟夫问题
+        //首先构建循环链表
+
+        Node<Integer> first = null;
+        //当前节点的上一个节点
+        Node<Integer> pre = null;
+        for(int i = 1;i<=41;i++){
+            //第一个元素
+            if(i==1){
+                first = new Node<>(i,null);
+                pre = first;
+                continue;
+            }
+            Node<Integer> newNode = new Node<>(i,null);
+            pre.next = newNode;
+            pre = newNode;
+            //最后一个节点
+            if(i==41){
+                pre.next = first;
+            }
         }
-        System.out.println(list.length());
-        System.out.println("------------------- ");
-        //测试get方法
-        System.out.println(list.get(2));
-        System.out.println("------------------------");
-        //测试remove方法
-        String remove = list.remove(1);
-        System.out.println(remove);
-        System.out.println(list.length());
-        System.out.println("----------------");
-        for (String s : list) {
-            System.out.println(s);
-        }
-
-
-        System.out.println("------------------------");
-        System.out.println("测试链表反转");
-
-
-        Linklist<Integer> list2 = new Linklist<>();
-        list2.insert(1);
-        list2.insert(2);
-        list2.insert(3);
-        list2.insert(4);
-        for (Integer i : list2) {
-            System.out.print(i+" ");
-        }
-        System.out.println();
-        System.out.println("--------------------");
-        list2.reverse();
-        for (Integer i : list2) {
-            System.out.print(i+" ");
-        }
-        System.out.println();
-        System.out.println("--------------------");
-
-        Node<String>first = new Node<String>("aa",null);
-        Node<String> second = new Node<String>("bb", null);
-        Node<String> third = new Node<String>("cc", null);
-        Node<String> fourth = new Node<String>("dd", null);
-        Node<String> fifth = new Node<String>("ee", null);
-        Node<String> six = new Node<String>("ff", null);
-        Node<String> seven = new Node<String>("gg",null);
-
-        first.next = second;
-        second.next = third;
-        third.next = fourth;
-        fourth.next = fifth;
-        fifth.next = six;
-        six.next = seven;
-
-        //产生环
-        seven.next = third;
-        //查找中间值
-//        String mid = getMid(first);
-//        System.out.println("中间值为："+mid);
-
-        boolean isCycle = isCycle(first);
-        System.out.println("first链表中是否有环："+isCycle);
-
-        //查找环的入口结点
-        Node<String> entrance = getEntrance(first);
-        System.out.println("first链表中环的入口结点元素为："+entrance.item);
+        //count计数器，模拟报数
+        int count = 0;
+        //当前节点
+        Node<Integer> current = first;
+        
     }
 
     @Override
