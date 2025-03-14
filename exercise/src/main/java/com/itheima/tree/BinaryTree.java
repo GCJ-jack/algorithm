@@ -1,9 +1,12 @@
 package com.itheima.tree;
 
+import com.itheima.linear.Linklist;
 import com.itheima.linear.Node;
 import com.sun.jdi.Value;
 
 import java.security.Key;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree<Key extends Comparable<Key>,Value> {
 
@@ -141,18 +144,125 @@ public class BinaryTree<Key extends Comparable<Key>,Value> {
             return x;
         }
     }
+
+    //前序遍历按层次从左往右输出每个节点
+    public Queue<Key> preErgodic(){
+        Queue<Key> keys = new LinkedList<>();
+        preErgodic(root,keys);
+        return keys;
+    }
+
+    private void preErgodic(Node x,Queue<Key> keys){
+        if (x==null){
+            return;
+        }
+        //把当前的节点放入到队列中
+        keys.add(x.key);
+        //依次加入左边节点
+        if(x.left!=null){
+            preErgodic(x.left,keys);
+        }
+        //依次加入右边的节点
+        if(x.right!=null){
+            preErgodic(x.right,keys);
+        }
+
+    }
+
+    public Queue<Key> midErgodic(){
+        Queue<Key> keys = new LinkedList<>();
+        midErgodic(root,keys);
+        return keys;
+    }
+
+    private void midErgodic(Node x,Queue<Key> keys){
+        if (x==null){
+            return;
+        }
+        //先加入左边的节点
+        if(x.left!=null){
+            midErgodic(x.left,keys);
+        }
+        //加入当前的节点在中间
+        keys.add(x.key);
+
+        //最后加入右边的节点
+        if(x.right!=null){
+            midErgodic(x.right,keys);
+        }
+    }
+
+    public Queue<Key> afterErgodic(){
+        Queue<Key> keys = new LinkedList<>();
+        afterErgodic(root,keys);
+        return keys;
+    }
+
+    private void afterErgodic(Node x,Queue<Key> keys){
+        if (x==null){
+            return;
+        }
+
+        //先是访问左子节点
+        if(x.left!=null){
+            afterErgodic(x.left,keys);
+        }
+        //然后是右子节点
+        if(x.right!=null){
+            afterErgodic(x.right,keys);
+        }
+        //最后是根节点
+        keys.add(x.key);
+    }
+
+    public Queue<Key> layerErgodic(){
+        //创立两个队列
+        //一个用于存储每一层节点然后去除掉
+        Queue<Node> que1 = new LinkedList<>();
+        //一个用于返回最终的答案
+        Queue<Key> que2 = new LinkedList<>();
+        //首先存入根节点
+        que1.add(root);
+        while(que1.size()>0){
+            Node x = que1.remove();
+            if(x.left!=null){
+                que1.add(x.left);
+            }
+            if(x.right!=null){
+                que1.add(x.right);
+            }
+            que2.add(x.key);
+        }
+        return que2;
+    }
+
     public static void main(String[] args) {
-        BinaryTree<Integer, String> bt = new BinaryTree<>();
-        bt.put(4, "二哈");
-        bt.put(1,"张三");
-        bt.put(3,"李四");
-        bt.put(5, "王五");
-        System.out.println(bt.size());
-        bt.put(1,"老三");
-        System.out.println(bt.get(1));
-        System.out.println(bt.size());
-        bt.delete(1);
-        System.out.println(bt.size());
+//        BinaryTree<Integer, String> bt = new BinaryTree<>();
+//        bt.put(4, "二哈");
+//        bt.put(1,"张三");
+//        bt.put(3,"李四");
+//        bt.put(5, "王五");
+//        System.out.println(bt.size());
+//        bt.put(1,"老三");
+//        System.out.println(bt.get(1));
+//        System.out.println(bt.size());
+//        bt.delete(1);
+//        System.out.println(bt.size());
+
+        BinaryTree<String, String> bt = new BinaryTree<>();
+        bt.put("E", "5");
+        bt.put("B", "2");
+        bt.put("G", "7");
+        bt.put("A", "1");
+        bt.put("D", "4");
+        bt.put("F", "6");
+        bt.put("H", "8");
+        bt.put("C", "3");
+        Queue<String> queue = bt.layerErgodic();
+        for (String key : queue) {
+            System.out.println(key+" ="+bt.get(key));
+        }
+
     }
 
     private class Node {
@@ -173,4 +283,5 @@ public class BinaryTree<Key extends Comparable<Key>,Value> {
         }
 
     }
+
 }
