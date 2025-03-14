@@ -236,6 +236,27 @@ public class BinaryTree<Key extends Comparable<Key>,Value> {
         return que2;
     }
 
+
+    public int maxDepth(){
+        return maxDepth(root);
+    }
+
+
+//    2.计算左子树的最大深度；
+//    3.计算右子树的最大深度；
+//    4.当前树的最大深度=左子树的最大深度和右子树的最大深度中的较大者+1
+    public int maxDepth(Node x){
+        //    1.如果根结点为空，则最大深度为0；
+        if(x==null){
+            return 0;
+        }
+        int leftDepth = maxDepth(x.left);
+
+        int rightDepth = maxDepth(x.right);
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
 //        BinaryTree<Integer, String> bt = new BinaryTree<>();
 //        bt.put(4, "二哈");
@@ -249,19 +270,49 @@ public class BinaryTree<Key extends Comparable<Key>,Value> {
 //        bt.delete(1);
 //        System.out.println(bt.size());
 
+//        BinaryTree<String, String> bt = new BinaryTree<>();
+//        bt.put("E", "5");
+//        bt.put("B", "2");
+//        bt.put("G", "7");
+//        bt.put("A", "1");
+//        bt.put("D", "4");
+//        bt.put("F", "6");
+//        bt.put("H", "8");
+//        bt.put("C", "3");
+//        Queue<String> queue = bt.layerErgodic();
+//        for (String key : queue) {
+//            System.out.println(key+" ="+bt.get(key));
+//        }
+
         BinaryTree<String, String> bt = new BinaryTree<>();
-        bt.put("E", "5");
-        bt.put("B", "2");
-        bt.put("G", "7");
-        bt.put("A", "1");
-        bt.put("D", "4");
-        bt.put("F", "6");
-        bt.put("H", "8");
-        bt.put("C", "3");
-        Queue<String> queue = bt.layerErgodic();
-        for (String key : queue) {
-            System.out.println(key+" ="+bt.get(key));
-        }
+        bt.put("E"
+                ,
+                "5");
+        bt.put("B"
+                ,
+                "2");
+        bt.put("G"
+                ,
+                "7");
+        bt.put("A"
+                ,
+                "1");
+        bt.put("D"
+                ,
+                "4");
+        bt.put("F"
+                ,
+                "6");
+        bt.put("H"
+                ,
+                "8");
+        bt.put("C"
+                ,
+                "3");
+
+        int i = bt.maxDepth();
+        System.out.println(i);
+
 
     }
 
@@ -281,7 +332,5 @@ public class BinaryTree<Key extends Comparable<Key>,Value> {
             this.left = left;
             this.right = right;
         }
-
     }
-
 }
