@@ -73,6 +73,61 @@ public class Stack<T> implements Iterable<T> {
         return true;
     }
 
+    public static int caculate(String[] str){
+        if(str.length ==0 && str==null){
+            return 0;
+        }
+        Integer o1;
+        Integer o2;
+        Integer result;
+        Stack<Integer> oprand = new Stack<>();
+        for (int i = 0; i < str.length; i++) {
+            String c = str[i];
+            switch (c) {
+                case "+":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = o1+o2;
+                    oprand.push(result);
+                    break;
+                case "-":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = o2 - o1;
+                    oprand.push(result);
+                    break;
+                case "*":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = o1*o2;
+                    oprand.push(result);
+                    break;
+                case "/":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = o2/o1;
+                    oprand.push(result);
+                    break;
+                case "%":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = o1%o2;
+                    oprand.push(result);
+                    break;
+                case "^":
+                    o1 = oprand.pop();
+                    o2 = oprand.pop();
+                    result = (int) Math.pow(o2, o1); // 幂运算
+                    oprand.push(result);
+                    break;
+                default:
+                    oprand.push(Integer.parseInt(c+""));
+                    break;
+            }
+        }
+        return oprand.pop();
+    }
+
 
     @Override
     public Iterator<T> iterator() {
@@ -107,8 +162,17 @@ public class Stack<T> implements Iterable<T> {
 //        System.out.println("弹出了元素："+result);
 //        System.out.println(stack.size());
 
-        String str = "(fdafds(fafds)())";
-        boolean match = match(str);
-        System.out.println(str + "中的括号是否匹配：" + match);
+//        String str = "(fdafds(fafds)())";
+//        boolean match = match(str);
+//        System.out.println(str + "中的括号是否匹配：" + match);
+
+
+        //中缀表达式3*（17-15）+18/6的逆波兰表达式如下
+        //中缀表达式3*（17-15）+18/6的逆波兰表达式如下
+        String[] notation = {"3", "17", "15", "-","*","18","6","/","+"};
+        int result = caculate(notation) ;
+
+
+        System.out.println("逆波兰表达式的结果为："+ result);
     }
 }
