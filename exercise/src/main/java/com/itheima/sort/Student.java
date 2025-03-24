@@ -6,6 +6,10 @@ public class Student implements Comparable<Student> {
 
     private int age;
 
+    public Student() {
+
+    }
+
     public String getName() {
         return name;
     }

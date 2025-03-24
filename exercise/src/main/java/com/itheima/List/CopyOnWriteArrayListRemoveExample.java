@@ -1,11 +1,12 @@
 package com.itheima.List;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class LinkedListRemoveExample {
+public class CopyOnWriteArrayListRemoveExample {
+
     public static void main(String[] args) {
-        List<Integer> list = new LinkedList();
+        CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>();
+
         list.add(1);
         list.add(2);
         list.add(3);
@@ -13,6 +14,5 @@ public class LinkedListRemoveExample {
         list.remove(0);
 
         System.out.println(list);
-
     }
 }
