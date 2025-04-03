@@ -1,8 +1,9 @@
 package com.itheima.List;
 
 public class leetcode24 {
+
     public ListNode swapPairs(ListNode head) {
-// 使用虚拟头节点简化操作
+        // 使用虚拟头节点简化操作
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy;
