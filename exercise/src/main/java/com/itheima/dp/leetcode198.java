@@ -3,7 +3,6 @@ package com.itheima.dp;
 public class leetcode198 {
     public int rob(int[] nums) {
 
-        int maxValue = 0;
 
         int n = nums.length;
 
