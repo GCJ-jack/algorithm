@@ -19,5 +19,6 @@ public class solution3 {
     }
     public int maxSubArray(int[] nums) {
 
+        return 0;
     }
 }

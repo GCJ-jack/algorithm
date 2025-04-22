@@ -1,5 +1,7 @@
 package com.itheima.stack;
 
+import com.itheima.linear.Stack;
+
 public class leetcode394 {
     public String decodeString(String s) {
         int multi = 0;

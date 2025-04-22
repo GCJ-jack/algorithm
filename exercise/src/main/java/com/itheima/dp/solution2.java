@@ -8,6 +8,7 @@ public class solution2 {
         // write code here
         ArrayList<Integer> res = new ArrayList<>();
 
+        return res;
     }
 
     public static void main(String[] args) {
