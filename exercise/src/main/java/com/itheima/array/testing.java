@@ -17,5 +17,12 @@ public class testing {
 //        dog.speak();
         Animal animal = dog;
 //        animal.bark();
+
+        if(animal instanceof Dog){
+            Dog dog1 = (Dog) animal;
+            dog1.bark();
+        } else {
+            System.out.println("不是狗，不能向下转型");
+        }
     }
 }
