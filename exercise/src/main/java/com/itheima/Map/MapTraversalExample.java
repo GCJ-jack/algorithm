@@ -11,9 +11,12 @@ public class MapTraversalExample {
         map.put("b",2);
         map.put("c",3);
 
-        for(Map.Entry<String, Integer> entry:map.entrySet()){
-            System.out.println(entry.getKey()+":"+entry.getValue());
+        for (String s : map.keySet()) {
+            System.out.println(s);
         }
 
+        for(Map.Entry<String,Integer> entry: map.entrySet()){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
     }
 }
