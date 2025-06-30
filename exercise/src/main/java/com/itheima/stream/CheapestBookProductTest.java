@@ -82,5 +82,7 @@ public class CheapestBookProductTest {
                 .findFirst();
 
         System.out.println(optional);
+
+
     }
 }

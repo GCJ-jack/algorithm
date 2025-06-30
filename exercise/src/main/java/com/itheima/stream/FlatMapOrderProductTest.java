@@ -3,6 +3,7 @@ package com.itheima.stream;
 import java.security.PublicKey;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -78,6 +79,15 @@ public class FlatMapOrderProductTest {
         public List<Product> getProducts() {
             return products;
         }
+
+        @Override
+        public String toString() {
+            return "订单ID: " + id +
+                    ", 客户等级: " + customer.getTier() +
+                    ", 下单日期: " + orderDate +
+                    ", 商品列表: " + products;
+        }
+
     }
 
     // 模拟订单数据
@@ -111,5 +121,13 @@ public class FlatMapOrderProductTest {
                 .collect(Collectors.toList());
 
         list.forEach(System.out::println);
+
+        List<Order> list1 = findAllOrders()
+                .stream()
+                .sorted(Comparator.comparing(Order::getOrderDate).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        list1.forEach(System.out::println);
     }
 }
