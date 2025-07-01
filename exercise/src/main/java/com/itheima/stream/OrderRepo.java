@@ -124,6 +124,25 @@ public class OrderRepo {
             orders.forEach(order -> System.out.println("  订单：" + order));
         });
 
+        HashMap<String, List<Long>> result = findAll()
+                .stream()
+                .collect(
+                        Collectors.groupingBy(
+                                order -> order.getCustomer().getName(),
+                                HashMap::new,
+                                Collectors.mapping(Order::getId, Collectors.toList()
+                                )
+                        )
+                );
 
+
+
+
+        // 打印结果
+        result.forEach((customerName, orderIds) -> {
+            System.out.println("客户：" + customerName);
+            System.out.println("订单 ID 列表：" + orderIds);
+            System.out.println("--------");
+        });
     }
 }
