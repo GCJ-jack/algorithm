@@ -2,6 +2,7 @@ package com.itheima.stream;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -108,23 +109,40 @@ public class OrderStatisticsDemo {
                 new Order(1, c1, LocalDate.of(2021, 2, 15), Arrays.asList(p1, p2, p4)), // ✅
                 new Order(2, c2, LocalDate.of(2021, 3, 1), Arrays.asList(p2)),         // ❌ Tier 不对
                 new Order(3, c3, LocalDate.of(2021, 4, 1), Arrays.asList(p1, p3)),     // ❌ 日期不对
-                new Order(4, c1, LocalDate.of(2021, 1, 25), Arrays.asList(p4))         // ❌ 日期不对
+                new Order(4, c1, LocalDate.of(2021, 1, 25), Arrays.asList(p4))  ,       // ❌ 日期不对
+                new Order(4, c1, LocalDate.of(2021, 3, 15), Arrays.asList(p4,p1,p2))
         );
     }
 
     public static void main(String[] args) {
-        double result = findAllOrders()
-            .stream()
-            .filter(order -> order.getOrderDate().compareTo(LocalDate.of(2021, 2, 1)) >= 0)
-            .filter(order -> order.getOrderDate().compareTo(LocalDate.of(2021, 3, 1)) < 0)
-            .flatMap(order -> order.getProducts().stream())
-            .peek(p -> System.out.println(p.getPrice()))
-            .mapToDouble(Product::getPrice)
-            .peek(d -> System.out.println(d))
-            .sum();
+//        double result = findAllOrders()
+//            .stream()
+//            .filter(order -> order.getOrderDate().compareTo(LocalDate.of(2021, 2, 1)) >= 0)
+//            .filter(order -> order.getOrderDate().compareTo(LocalDate.of(2021, 3, 1)) < 0)
+//            .flatMap(order -> order.getProducts().stream())
+//            .peek(p -> System.out.println(p.getPrice()))
+//            .mapToDouble(Product::getPrice)
+//            .peek(d -> System.out.println(d))
+//            .sum();
 
 
 //        System.out.println(result);
+
+//        double averagePrice = findAllOrders()
+//                .stream()
+//                .filter(order -> order.getOrderDate().isEqual(LocalDate.of(2021, 3, 15)))
+//                .flatMap(order -> order.getProducts().stream())
+//                .mapToDouble(Product::getPrice)
+//                .average()
+//                .getAsDouble();
+//
+//        System.out.println(averagePrice);
+
+//        DoubleSummaryStatistics statistics = productRepo.findAll()
+//                .stream()
+//                .filter(p -> p.getCategory().equalsIgnoreCase("Books"))
+//                .mapToDouble(Product::getPrice)
+//                .summaryStatistics();
 
     }
 
