@@ -1,5 +1,6 @@
 package com.itheima.ticketStock;
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -12,6 +13,13 @@ public class main {
     static final ReentrantLock re_lock = new ReentrantLock();
 
     static final Object object = new Object();
+
+
+    public static void excptionTest() throws IOException {
+        boolean f = false;
+
+        throw new IOException("运行时异常");
+    }
     public static void main(String[] args) throws InterruptedException {
 
 
@@ -25,19 +33,21 @@ public class main {
 //            }).start();
 //        }
 
-        for (int i = 0; i < 1000; i++) {
-            new Thread(()->{
-                re_lock.lock();
-                if(ticketNumber > 0){
-                    try {
-                        ticketNumber--;
-                    }finally {
-                        re_lock.unlock();
-                    }
-                }
-            }).start();
-        }
+//        for (int i = 0; i < 1000; i++) {
+//            new Thread(()->{
+//                re_lock.lock();
+//                if(ticketNumber > 0){
+//                    try {
+//                        ticketNumber--;
+//                    }finally {
+//                        re_lock.unlock();
+//                    }
+//                }
+//            }).start();
+//        }
+//
+//        System.out.println("remain " + ticketNumber);
 
-        System.out.println("remain " + ticketNumber);
+        excptionTest();
     }
 }
