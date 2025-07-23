@@ -1,8 +1,10 @@
 package com.itheima.ticketStock;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class main {
 
-    static int ticketNumber = 100;
+    static AtomicInteger ticketNumber = new AtomicInteger(100);
 
     static final Object object = new Object();
     public static void main(String[] args) throws InterruptedException {
@@ -10,20 +12,11 @@ public class main {
 
         for(int i = 0; i < 1000; i++){
             new Thread(()->{
-
-//                    try {
-//                        Thread.sleep(10);
-//                        ticketNumber--; // 非原子操作
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-                if(ticketNumber > 0){
-                    synchronized (object){
-                        ticketNumber--;
-                    }
-                }
-                System.out.println("卖完一张票，剩余：" + ticketNumber);
-
+                int current;
+                do{
+                    current = ticketNumber.get();
+                    if (current <= 0) break; // 票已售罄
+                }while (ticketNumber.compareAndSet(current,current -1));
             }).start();
         }
 
