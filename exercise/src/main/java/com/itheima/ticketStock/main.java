@@ -63,22 +63,35 @@ public class main {
 
 //        excptionTest();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+//        ExecutorService executorService = Executors.newFixedThreadPool(5);
+//
+//        for (int i = 0; i < 500; i++) {
+//            int userId = i + 1;
+//            executorService.execute(() ->{
+//                boolean result = grabTicket(userId);
+//                if(result){
+//                    System.out.println("成功抢到票");
+//                }else{
+//                    System.out.println("没抢到票");
+//                }
+//            });
+//        }
+//
+//        Thread.sleep(2000);
+//        System.out.println("剩余票的数量： " + ticketNumber);
 
-        for (int i = 0; i < 500; i++) {
-            int userId = i + 1;
-            executorService.execute(() ->{
-                boolean result = grabTicket(userId);
-                if(result){
-                    System.out.println("成功抢到票");
-                }else{
-                    System.out.println("没抢到票");
-                }
-            });
-        }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("running");
+            }
+        };
 
-        Thread.sleep(2000);
-        System.out.println("剩余票的数量： " + ticketNumber);
+
+        Thread thread = new Thread(runnable);
+
+
+        thread.start();
 
     }
 }
