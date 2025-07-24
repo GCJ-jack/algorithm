@@ -20,7 +20,7 @@ public class main {
 
         throw new IOException("运行时异常");
     }
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
 
 //        for(int i = 0; i < 1000; i++){
