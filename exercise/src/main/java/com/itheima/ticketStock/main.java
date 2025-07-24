@@ -1,6 +1,10 @@
 package com.itheima.ticketStock;
 
+import javax.xml.transform.Source;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,6 +23,15 @@ public class main {
         boolean f = false;
 
         throw new IOException("运行时异常");
+    }
+
+    private static synchronized boolean grabTicket(int userId){
+        if(ticketNumber > 0){
+            ticketNumber--;
+            return true;
+        }else{
+            return false;
+        }
     }
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -48,6 +61,24 @@ public class main {
 //
 //        System.out.println("remain " + ticketNumber);
 
-        excptionTest();
+//        excptionTest();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+        for (int i = 0; i < 500; i++) {
+            int userId = i + 1;
+            executorService.execute(() ->{
+                boolean result = grabTicket(userId);
+                if(result){
+                    System.out.println("成功抢到票");
+                }else{
+                    System.out.println("没抢到票");
+                }
+            });
+        }
+
+        Thread.sleep(2000);
+        System.out.println("剩余票的数量： " + ticketNumber);
+
     }
 }
