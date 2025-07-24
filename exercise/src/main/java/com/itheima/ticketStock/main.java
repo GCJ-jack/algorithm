@@ -2,6 +2,7 @@ package com.itheima.ticketStock;
 
 import javax.xml.transform.Source;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -80,12 +81,14 @@ public class main {
 //        Thread.sleep(2000);
 //        System.out.println("剩余票的数量： " + ticketNumber);
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("running");
-            }
-        };
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("running");
+//            }
+//        };
+
+        Runnable runnable = () -> System.out.println("running");
 
 
         Thread thread = new Thread(runnable);
