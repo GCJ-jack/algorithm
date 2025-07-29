@@ -8,25 +8,26 @@ public class SnakesAndLadders {
 
 
     public int snakesAndLadders(int[][] board) {
-         int n = board.length;
+        int n = board.length;
 
-         //反转棋盘到一维
-        int[] boardArray = new int[n*n-1];
+        //反转棋盘到一维
+        int[] boardArray = new int[n*n + 1];
         boolean leftOrRight = true;
 
         int index = 1;
-        for (int i = n-1; i >=0; i--) {
-            if(leftOrRight){
+        for (int i = n - 1; i >= 0; i--) {
+            if (leftOrRight) {
                 for (int j = 0; j < n; j++) {
                     boardArray[index++] = board[i][j];
                 }
-            }else if(!leftOrRight){
-                for (int j = n-1; j >= 0; j--) {
+            } else {
+                for (int j = n - 1; j >= 0; j--) {
                     boardArray[index++] = board[i][j];
                 }
             }
             leftOrRight = !leftOrRight;
         }
+
         //初始化队列来保存状态，目前到达以及花费的步数
         Queue<int[]> queue = new Queue<>();
         //创立数组来记录以及走过的地方
@@ -50,13 +51,13 @@ public class SnakesAndLadders {
                     next = boardArray[next];
                 }
 
-                if(next == n * n + 1){
-                    return steps;
+                if(next == n * n){
+                    return steps + 1;
                 }
 
-                if(!visited[position]){
-                    visited[position] = true;
-                    queue.enqueue(new int[]{position,steps+1});
+                if(!visited[next]){
+                    visited[next] = true;
+                    queue.enqueue(new int[]{next,steps+1});
                 }
 
             }
