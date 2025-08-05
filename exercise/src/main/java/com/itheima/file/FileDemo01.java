@@ -8,10 +8,9 @@ public class FileDemo01 {
     public static void main(String[] args) throws IOException {
 
 
-        File file = new File("/file");
+        File file = new File("/Users/guochaojun/Desktop/algorithm","files");
 
-        boolean a =  file.createNewFile();
-
+        boolean a =  file.mkdirs();
 
         System.out.println(a);
     }
