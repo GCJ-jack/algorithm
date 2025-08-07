@@ -39,5 +39,7 @@ public class IoPractice1 {
         System.out.println(stringBuffer.toString());
 
         System.out.println("读写完成");
+
+        fis.close();
     }
 }
