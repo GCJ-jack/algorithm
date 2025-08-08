@@ -3,6 +3,7 @@ package com.itheima.net;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.UUID;
 
 public class ReceiveFileDemo {
 
@@ -14,8 +15,13 @@ public class ReceiveFileDemo {
 
         Socket socket = serverSocket.accept();
 
+
+        UUID uuid = UUID.randomUUID();
+
+        String id = uuid.toString().replaceAll("-","");
+
         BufferedInputStream bufferedInputStream = new BufferedInputStream(socket.getInputStream());
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("new_pic.png"));
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(id +".png"));
 
 
         byte[] bytes = new byte[1024];
