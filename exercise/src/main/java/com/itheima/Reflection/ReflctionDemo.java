@@ -1,10 +1,11 @@
 package com.itheima.Reflection;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Properties;
 
 public class ReflctionDemo {
 
@@ -28,11 +29,37 @@ public class ReflctionDemo {
         bufferedWriter.close();
     }
 
-    public static void main(String[] args) throws IOException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
 
 
 //        Teacher teacher = new Teacher("Michael", 40,"Math");
 //
 //        saveObject(teacher);
+
+        Properties properties = new Properties();
+
+        FileInputStream fileInputStream = new FileInputStream("prop.properties");
+
+        properties.load(fileInputStream);
+
+        fileInputStream.close();
+
+        String classname = (String) properties.get("classname");
+
+        String method = (String) properties.get("method");
+
+        Class clazz = Class.forName(classname);
+
+        Constructor<?> constructor = clazz.getDeclaredConstructor(String.class, int.class, String.class);
+
+        Object object = constructor.newInstance("Michael",40,"Math");
+
+        System.out.println(object);
+
+        Method method1 = clazz.getMethod(method);
+
+        method1.setAccessible(true);
+
+        method1.invoke(object);
     }
 }
