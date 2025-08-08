@@ -17,7 +17,7 @@ public class Teacher {
         System.out.println("有参构造方法执行...");
     }
 
-    private Teacher(String name, int age, String subject) {
+    public Teacher(String name, int age, String subject) {
         this.name = name;
         this.age = age;
         this.subject = subject;

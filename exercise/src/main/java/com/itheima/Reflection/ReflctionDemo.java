@@ -31,8 +31,8 @@ public class ReflctionDemo {
     public static void main(String[] args) throws IOException, IllegalAccessException {
 
 
-        Teacher teacher = new Teacher("Michael", 40);
-
-        saveObject(teacher);
+//        Teacher teacher = new Teacher("Michael", 40,"Math");
+//
+//        saveObject(teacher);
     }
 }
