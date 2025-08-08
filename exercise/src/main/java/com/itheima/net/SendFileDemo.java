@@ -3,7 +3,6 @@ package com.itheima.net;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class SendFileDemo {
 
