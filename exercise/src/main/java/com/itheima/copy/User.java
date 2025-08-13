@@ -1,6 +1,8 @@
 package com.itheima.copy;
 
-public class User implements Cloneable{
+import java.io.Serializable;
+
+public class User implements Serializable,Cloneable {
 
     private String name;
 
