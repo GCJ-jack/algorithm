@@ -5,10 +5,7 @@ public class DeepCopy {
     public static void main(String[] args) {
         Teacher teacher = new Teacher("lisa");
 
-
         User user1 = new User("chaojun",teacher,23);
-
-
 
         User user2 = DeepCopyUtil.deepCopy(user1);
 
