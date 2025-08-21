@@ -1,11 +1,27 @@
 package com.itheima.array;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 public class FunctionalProgramming {
+
+
+    static class Student {
+        String name;
+        int score;
+
+        public int getScore(){
+            return score;
+        }
+
+        Student(String name, int score) {
+            this.name = name; this.score = score;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -76,6 +92,38 @@ public class FunctionalProgramming {
         int a = nums3.stream().max(Integer::compareTo).get();
 
         System.out.println(a);
+
+        List<Student> students = Arrays.asList(
+                new Student("Tom", 59),
+                new Student("Jack", 82),
+                new Student("Rose", 91)
+        );
+
+        students.stream().sorted((d,b) -> b.score - d.score).forEach(d-> System.out.println(d.score));
+
+        Map<String,Integer> map2 = students.stream().filter(k -> k.score > 60).collect(Collectors.toMap(
+                name -> name.name,
+                score -> score.score
+        ));
+
+
+        for(Map.Entry<String,Integer> entry:map2.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
+        int highest_scroe = students.stream().map(Student::getScore).max(Integer::compareTo).get();
+
+        System.out.println(highest_scroe);
+
+
+        double average_score = students.stream().mapToInt(Student::getScore).average().getAsDouble();
+
+        System.out.println(average_score);
+
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        System.out.println(localDateTime);
 
     }
 }
