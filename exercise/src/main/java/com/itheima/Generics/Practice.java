@@ -185,4 +185,6 @@ public class Practice {
         double avgScore = students.stream().collect(Collectors.averagingInt(s -> s.score));
         System.out.println("maxScore=" + maxScore + ", avgScore=" + avgScore);
     }
+
+
 }
