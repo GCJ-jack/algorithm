@@ -6,7 +6,7 @@ public class IoPractice1 {
 
 
     public static void readFile(String file) throws IOException {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         try(InputStream fis = new FileInputStream(file)){
             int content;
             while ((content = fis.read()) != -1){
@@ -15,7 +15,7 @@ public class IoPractice1 {
         }catch (IOException ioException){
             ioException.printStackTrace();
         }
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
 
         System.out.println("整个流程占用 " + (end - start));
     }
@@ -47,18 +47,20 @@ public class IoPractice1 {
     }
 
     public static void readInBuffer(String file) throws IOException{
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
 
-        try(BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))){
+        try(BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("newFile.txt"));){
+
             int len;
             byte[] bytes = new byte[4 * 1024];
 
-            while ((len = bufferedInputStream.read())!=-1){
-                System.out.println(len);
+            while ((len = bufferedInputStream.read(bytes))!=-1){
+                bufferedOutputStream.write(bytes,0,len);
             }
         }
 
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
 
         System.out.println("整个流程占用 " + (end - start));
     }
@@ -106,6 +108,8 @@ public class IoPractice1 {
 //        readChineseFromFile(path);
 
 //        writeChineseInTheFile(path);
+
+        readInBuffer(path);
 
     }
 }
