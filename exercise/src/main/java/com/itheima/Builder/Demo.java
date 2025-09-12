@@ -20,6 +20,6 @@ public class Demo {
         System.out.println(SQL.select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
 
 
-        System.out.println(SQL.update().table("User").set("name","chaojun").where("age < 12").updatesql());
+        System.out.println(SQL.update().table("User").where("age < 12").set("name","chaojun").buildSql());
     }
 }

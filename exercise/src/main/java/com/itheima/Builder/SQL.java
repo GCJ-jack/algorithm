@@ -2,7 +2,6 @@ package com.itheima.Builder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.stream.Collectors;
 
 public class SQL {
@@ -19,29 +18,32 @@ public class SQL {
         return new updateBuilder();
     }
 
-    public static class updateBuilder{
+    public static class updateBuilder implements TableStage, WhereStage, SetStage{
         private String table;
 
         private String where;
 
         Map<String,String> setMap = new LinkedHashMap<>();
 
-        public updateBuilder table(String table){
+        @Override
+        public WhereStage table(String table){
             this.table = table;
             return this;
         }
 
-        public updateBuilder where(String where){
+        @Override
+        public SetStage where(String where){
             this.where = where;
             return this;
         }
 
-        public updateBuilder set(String col,String val){
+        @Override
+        public SetStage set(String col,String val){
             setMap.put(col,val);
             return this;
         }
 
-        public String updatesql(){
+        public String buildSql(){
 
             StringBuilder stringBuilder = new StringBuilder("");
 
@@ -129,5 +131,19 @@ public class SQL {
             setMap.put(col, val);
             return this;
         }
+    }
+
+    interface TableStage{
+        WhereStage table(String table);
+    }
+
+    interface WhereStage{
+        SetStage where(String where);
+    }
+
+    interface SetStage{
+        SetStage set(String col,String val);
+
+        String buildSql();
     }
 }
