@@ -13,7 +13,9 @@ public class Demo {
 //        user.name("Tom");
 //
 //        User user1 = user.builder();
-        User user = User.builder().age(12).name("Tom").build();
+//        User user = User.builder().age(12).name("Tom").build();
+
+        System.out.println(SQL.builder(SQL.sqlType.SELECT).select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
 
     }
 }
