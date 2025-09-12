@@ -25,6 +25,9 @@ public class Demo {
                         .buildsql()
         );
 
+        System.out.println(SQL.select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
+
+
 
     }
 }

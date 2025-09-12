@@ -14,6 +14,51 @@ public class SQL {
         return new sqlBuilder(type);
     }
 
+    public static selectBuilder select(String... columns){
+        return new selectBuilder(columns);
+    }
+
+    public static class selectBuilder{
+        private String[] column;
+
+        private String table;
+
+        private String where;
+
+        public selectBuilder select(String... column){
+            this.column = column;
+            return this;
+        }
+
+        public selectBuilder table(String table){
+            this.table = table;
+            return this;
+        }
+
+        public selectBuilder where(String where){
+            this.where = where;
+            return this;
+        }
+
+        private selectBuilder(String[] column){
+            this.column = column;
+        }
+
+
+        public String buildsql(){
+            StringBuilder stringBuilder = new StringBuilder("");
+
+            stringBuilder.append("SELECT ").append(String.join(",",column)).append(" FROM ").append(table);
+
+            if(where != null){
+                stringBuilder.append(" WHERE ").append(where);
+            }
+
+            return stringBuilder.toString();
+        }
+
+    }
+
     public static class sqlBuilder{
 
         final sqlType type;
