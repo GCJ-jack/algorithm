@@ -10,22 +10,29 @@ public class User {
 
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
     public static class Builder{
         private String name;
 
         private int age;
 
-        public void name(String name){
+
+
+        public Builder name(String name){
             this.name = name;
-
+            return this;
         }
 
-        public void age(int age){
+        public Builder age(int age){
             this.age = age;
+            return  this;
         }
 
 
-        public User builder(){
+        public User build(){
             User user = new User();
             user.setName(name);
             user.setAge(age);
@@ -37,6 +44,10 @@ public class User {
 
             }
             return user;
+        }
+
+        private Builder(){
+
         }
     }
 
