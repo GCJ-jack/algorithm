@@ -1,5 +1,9 @@
 package com.itheima.Builder;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class SQL {
 
     private SQL(){
@@ -20,6 +24,8 @@ public class SQL {
 
         private String where;
 
+        Map<String,String> setMap = new LinkedHashMap<>();
+
         public sqlBuilder select(String... column){
             this.column = column;
             return this;
@@ -35,9 +41,16 @@ public class SQL {
             return this;
         }
 
+        public sqlBuilder set(String col,String val){
+            setMap.put(col,val);
+            return this;
+        }
+
         private sqlBuilder(sqlType type){
             this.type = type;
         }
+
+
 
         public String buildsql(){
             StringBuilder stringBuilder = new StringBuilder("");
@@ -50,8 +63,21 @@ public class SQL {
                         stringBuilder.append(" WHERE ").append(where);
                     }
                 }
-//
-//                case UPDATE ->
+
+                case UPDATE ->{
+                    stringBuilder.append("UPDATE ").append(table).append(" SET ");
+
+                    String setString = setMap.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).collect(Collectors.joining(","));
+
+                    stringBuilder.append(setString);
+                    if(where != null){
+                        stringBuilder.append(" WHERE ").append(where);
+                    }
+                }
+
+                default -> {
+                    throw new IllegalArgumentException("请输入合适的sql语句");
+                }
 
             }
 

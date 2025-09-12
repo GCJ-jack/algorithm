@@ -17,5 +17,14 @@ public class Demo {
 
         System.out.println(SQL.builder(SQL.sqlType.SELECT).select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
 
+        System.out.println(
+                SQL.builder(SQL.sqlType.UPDATE)
+                        .table("User")
+                        .set("name","chaojun")
+                        .where("age == 23")
+                        .buildsql()
+        );
+
+
     }
 }
