@@ -15,19 +15,11 @@ public class Demo {
 //        User user1 = user.builder();
 //        User user = User.builder().age(12).name("Tom").build();
 
-        System.out.println(SQL.builder(SQL.sqlType.SELECT).select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
 
-        System.out.println(
-                SQL.builder(SQL.sqlType.UPDATE)
-                        .table("User")
-                        .set("name","chaojun")
-                        .where("age == 23")
-                        .buildsql()
-        );
 
         System.out.println(SQL.select(new String[]{"name","age"}).table("User").where("age < 12").buildsql());
 
 
-
+        System.out.println(SQL.update().table("User").set("name","chaojun").where("age < 12").updatesql());
     }
 }
