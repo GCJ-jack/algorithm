@@ -53,30 +53,25 @@ public class NioServer {
                     client.register(selector, SelectionKey.OP_READ);
                 }
 
-                // 如果是一个通道有数据可读（OP_READ）
+
                 if(key.isReadable()){
-                    // 拿到对应的客户端通道
-                    SocketChannel client = (SocketChannel) key.channel();
-                    // 分配一个缓冲区用于读取数据
-                    ByteBuffer buffer = ByteBuffer.allocate(1024);
 
-                    // 读取数据：返回 -1 表示客户端关闭连接
-                    if(client.read(buffer)!= -1){
-                        System.out.println(client.getRemoteAddress() + " 断开连接了");
-                        client.close();
-                        // 关闭连接
-                    }else{
+                    SocketChannel socketChannel = (SocketChannel) key.channel();
 
-                        // 切换到读模式（从 buffer 写模式转成读模式）
-                        buffer.flip();
-                        // 把 buffer 里的数据取出来
-                        byte[] bytes = new byte[buffer.remaining()];
-                        buffer.get(bytes);
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+
+                    if(socketChannel.read(byteBuffer)== -1){
+                        System.out.println(socketChannel.getRemoteAddress() + " 断开连接了");
+                        socketChannel.close();
+                    }else {
+                        byteBuffer.flip();
+                        byte[] bytes = new byte[1024];
+                        byteBuffer.get(bytes);
                         // 打印客户端发来的字符串
                         System.out.println(new String(bytes));
-                        // 清空缓冲区，准备下次使用
-                        buffer.clear();
                     }
+
+                    byteBuffer.clear();
                 }
             }
         }
