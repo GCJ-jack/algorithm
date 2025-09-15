@@ -81,9 +81,17 @@ public class NettyClientInterruption {
         return running;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        Thread thread1 = new Thread(() ->{
+            startClient("线程 1");
+        });
 
+        thread1.start();
+
+        Thread.sleep(3000);
+
+        thread1.interrupt();
 
     }
 }
