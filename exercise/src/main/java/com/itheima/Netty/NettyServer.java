@@ -69,7 +69,6 @@ public class NettyServer {
             this.db = db;
         }
 
-
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
             List<String> messageList = db.computeIfAbsent(channelHandlerContext.channel(), k -> new ArrayList<>());
