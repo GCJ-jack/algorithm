@@ -9,6 +9,7 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,9 +31,6 @@ public class NettyServer {
                                 .addLast(new StringEncoder())
                                 .addLast(new ResponseHandler())
                                 .addLast(new Dbhandler(db));
-                        //加入相对应的回应处理器
-
-                        //以及这个 db 处理器
                     }
                 });
 
@@ -73,8 +71,9 @@ public class NettyServer {
 
 
         @Override
-        protected void channelRead0(ChannelHandlerContext channelHandlerContext, String string) throws Exception {
-
+        protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
+            List<String> messageList = db.computeIfAbsent(channelHandlerContext.channel(), k -> new ArrayList<>());
+            messageList.add(msg);
         }
         @Override
         public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
