@@ -1,15 +1,9 @@
 package com.itheima.SPI;
-
-import com.mysql.cj.xdevapi.Table;
-
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class DriverCase {
 
@@ -87,7 +81,9 @@ public class DriverCase {
 //        Connection  connection = driver.connect(url,properties);
 
 
-        Connection connection = DriverManager.getConnection(url,properties.getProperty("user"),properties.getProperty("password"));
+//        Connection connection = DriverManager.getConnection(url,properties.getProperty("user"),properties.getProperty("password"));
+
+
 
 //
 //        4、方式4，自动注册驱动
@@ -127,20 +123,23 @@ public class DriverCase {
 //        实际开发中，使用jdbc这是最优的方式，推荐大家使用，灵活性最强，耦合性最弱。
 
 
-        Map<String,String> column = new HashMap<>();
+//        Map<String,String> column = new HashMap<>();
+//
+//        column.put("id", "INT PRIMARY KEY AUTO_INCREMENT");
+//        column.put("name", "VARCHAR(50) NOT NULL");
+//        column.put("age", "INT");
+//        column.put("email", "VARCHAR(100) UNIQUE");
+//        column.put("created_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
 
-        column.put("id", "INT PRIMARY KEY AUTO_INCREMENT");
-        column.put("name", "VARCHAR(50) NOT NULL");
-        column.put("age", "INT");
-        column.put("email", "VARCHAR(100) UNIQUE");
-        column.put("created_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
+//        createTable(connection,"User",column);
 
-        createTable(connection,"User",column);
-
-        User user = User.builder().email("8888888899966@qq.com").name("chaojun guo").age(22).createdAt(LocalDateTime.now()).build();
+        User user = User.builder().email("testUser1@qq.com").name("chaojun guo").age(22).createdAt(LocalDateTime.now()).build();
 
 
-        insertUser(connection,user);
-
+        try(Connection connection = ConnectionPool.getConnection()){
+            insertUser(connection,user);
+        }catch (SQLException e) {
+            System.err.println("Error inserting user: " + e.getMessage());
+        }
     }
 }

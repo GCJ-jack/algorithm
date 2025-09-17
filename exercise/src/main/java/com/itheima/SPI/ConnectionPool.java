@@ -45,6 +45,10 @@ public class ConnectionPool {
 
 
     public static Connection getConnection() throws SQLException {
+
+        if(hikariDataSource == null){
+            ConnectionPool.getDataSource();
+        }
         return hikariDataSource.getConnection();
     }
 
