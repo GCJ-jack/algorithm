@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.heima.AppTest" time="0.006" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="gopherProxySet" value="false"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="http.proxyHost" value="127.0.0.1"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/guochaojun/Desktop/algorithm/module1/target/test-classes:/Users/guochaojun/Desktop/algorithm/module1/target/classes:/Users/guochaojun/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:"/>
+    <property name="https.proxyPort" value="1082"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk@11/11.0.27/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/guochaojun/Desktop/algorithm/module1/target/surefire/surefirebooter-20250917163704237_3.jar /Users/guochaojun/Desktop/algorithm/module1/target/surefire 2025-09-17T16-36-59_798-jvmRun1 surefire-20250917163704237_1tmp surefire_0-20250917163704237_2tmp"/>
+    <property name="http.nonProxyHosts" value="captive.apple.com|*.captive.apple.com|localhost|*.localhost|10.0.0.0/8|*.10.0.0.0/8|local|*.local|172.16.0.0/12|*.172.16.0.0/12|192.168.124.1.dns|*.192.168.124.1.dns|198.18.0.0/15|*.198.18.0.0/15|192.168.0.0/16|*.192.168.0.0/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/guochaojun/Desktop/algorithm/module1/target/test-classes:/Users/guochaojun/Desktop/algorithm/module1/target/classes:/Users/guochaojun/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/guochaojun"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk@11/11.0.27/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="https.proxyHost" value="127.0.0.1"/>
+    <property name="basedir" value="/Users/guochaojun/Desktop/algorithm/module1"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/Users/guochaojun/Desktop/algorithm/module1/target/surefire/surefirebooter-20250917163704237_3.jar"/>
+    <property name="user.script" value="Hans"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="captive.apple.com|*.captive.apple.com|localhost|*.localhost|10.0.0.0/8|*.10.0.0.0/8|local|*.local|172.16.0.0/12|*.172.16.0.0/12|192.168.124.1.dns|*.192.168.124.1.dns|198.18.0.0/15|*.198.18.0.0/15|192.168.0.0/16|*.192.168.0.0/16"/>
+    <property name="java.runtime.version" value="11.0.27+0"/>
+    <property name="user.name" value="guochaojun"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.6.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/guochaojun/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/ws/kt56mwm50y7c5v079g_n2d0h0000gn/T/"/>
+    <property name="java.version" value="11.0.27"/>
+    <property name="user.dir" value="/Users/guochaojun/Desktop/algorithm/module1"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/Users/guochaojun/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="11.0.27+0"/>
+    <property name="java.specification.maintenance.version" value="3"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="socksNonProxyHosts" value="captive.apple.com|*.captive.apple.com|localhost|*.localhost|10.0.0.0/8|*.10.0.0.0/8|local|*.local|172.16.0.0/12|*.172.16.0.0/12|192.168.124.1.dns|*.192.168.124.1.dns|198.18.0.0/15|*.198.18.0.0/15|192.168.0.0/16|*.192.168.0.0/16"/>
+    <property name="http.proxyPort" value="1082"/>
+  </properties>
+  <testcase name="testApp" classname="com.heima.AppTest" time="0.0"/>
+</testsuite>
