@@ -65,7 +65,7 @@ public class BufferPool {
             }
 
             if((free + slotSize * slotQueue.size()) >= size){
-//                freeUp(size);
+                freeUp(size);
                 free -= size;
                 return ByteBuffer.allocate(size);
             }
@@ -89,7 +89,7 @@ public class BufferPool {
                     }
 
                     if ((free + slotQueue.size() * slotSize) >= size) {
-//                        freeUp(size);
+                        freeUp(size);
                         free -= size;
                         return ByteBuffer.allocate(size);
                     }
@@ -110,9 +110,26 @@ public class BufferPool {
         }
     }
 
-    public void deallocate(){
+    public void deallocate(ByteBuffer byteBuffer){
+        lock.lock();
 
+        try {
+            if(byteBuffer.capacity() == this.slotSize){
+                slotQueue.addLast(byteBuffer);
+            }else{
+                free += byteBuffer.capacity();
+            }
+
+            //如果有线程等待直接唤醒
+
+            if(!waiter.isEmpty()){
+                waiter.peekFirst().signal();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            lock.unlock();
+        }
     }
-
 
 }
