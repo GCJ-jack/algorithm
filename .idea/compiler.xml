@@ -13,6 +13,7 @@
         <module name="exercise" />
         <module name="module1" />
         <module name="Consumer" />
+        <module name="buffer-pool-demo" />
         <module name="module3" />
         <module name="module2" />
       </profile>
