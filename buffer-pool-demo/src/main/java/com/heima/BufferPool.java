@@ -53,18 +53,19 @@ public class BufferPool {
 //    一旦内存满足条件，唤醒等待的线程，并返回一个 ByteBuffer。
 
     public ByteBuffer allocate(int size,long timeout) throws InterruptedException {
+
         if(size > totalSize || size < 0){
             throw new RuntimeException();
         }
 
         lock.lock();
-
         try {
+
             if(size == slotSize && !slotQueue.isEmpty()){
                 return slotQueue.pollFirst();
             }
 
-            if((free + slotSize * slotQueue.size()) >= size){
+            if((free + slotQueue.size() * slotSize) >= size){
                 freeUp(size);
                 free -= size;
                 return ByteBuffer.allocate(size);
@@ -72,40 +73,44 @@ public class BufferPool {
 
             Condition condition = lock.newCondition();
             waiter.addLast(condition);
-            long remainTime  = timeout;
+
+            long remainTime = timeout;
+
 
             try {
                 while (true){
                     long start = System.currentTimeMillis();
 
-                    boolean wakeup = condition.await(remainTime, TimeUnit.MILLISECONDS);
+                    boolean wakeUp = condition.await(remainTime,TimeUnit.MILLISECONDS);
 
-                    if(!wakeup){
+                    if(!wakeUp){
                         throw new RuntimeException("规定时间内不能申请需要的内存");
                     }
 
-                    if(size == slotSize &&!slotQueue.isEmpty()){
+                    if(size == slotSize && !slotQueue.isEmpty()){
                         return slotQueue.pollFirst();
                     }
 
-                    if ((free + slotQueue.size() * slotSize) >= size) {
+                    if((free + slotQueue.size() * slotSize) >= size){
                         freeUp(size);
                         free -= size;
                         return ByteBuffer.allocate(size);
                     }
+
 
                     remainTime -= System.currentTimeMillis() - start;
                 }
             }finally {
                 waiter.remove(condition);
             }
+
         }finally {
             lock.unlock();
         }
     }
 
     private void freeUp(int size){
-        while(free < size && !slotQueue.isEmpty()){
+        while (free < size && !slotQueue.isEmpty()){
             free += slotQueue.pollFirst().capacity();
         }
     }
@@ -114,18 +119,17 @@ public class BufferPool {
         lock.lock();
 
         try {
-            if(byteBuffer.capacity() == this.slotSize){
+            if(byteBuffer.capacity() == slotSize){
                 slotQueue.addLast(byteBuffer);
             }else{
                 free += byteBuffer.capacity();
             }
 
             //如果有线程等待直接唤醒
-
             if(!waiter.isEmpty()){
                 waiter.peekFirst().signal();
             }
-        } catch (Exception e) {
+        }catch (Exception e) {
             throw new RuntimeException(e);
         }finally {
             lock.unlock();
