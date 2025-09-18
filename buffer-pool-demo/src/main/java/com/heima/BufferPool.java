@@ -54,7 +54,7 @@ public class BufferPool {
 
     public ByteBuffer allocate(int size,long timeout) throws InterruptedException {
         if(size > totalSize || size < 0){
-            return slotQueue.pollFirst();
+            throw new RuntimeException();
         }
 
         lock.lock();
