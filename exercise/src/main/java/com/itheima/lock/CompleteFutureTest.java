@@ -59,27 +59,35 @@ public class CompleteFutureTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
+//
+//
+//        String s = getUserInfoAsync(1).get();
+//
+//        System.out.println(s);
+//
+//        String s1 = getProductInfoAsync(1).get();
+//
+//        System.out.println(s1);
+//
+//        double discount = calculateDiscountAsync(1,1).get();
+//
+//        System.out.println("折扣 "+ discount);
+//
+//        String orderResult = createOrderAsync(s,s1,discount).get();
+//
+//        System.out.println(orderResult);
+//
+//        long end = System.currentTimeMillis() - start;
+//
+//        System.out.println("总耗时 " + end);
 
+        CompletableFuture<String> completableFuture = getUserInfoAsync(1);
 
-        String s = getUserInfoAsync(1).get();
+        CompletableFuture<String> completableFuture1 = getProductInfoAsync(1);
 
-        System.out.println(s);
+        CompletableFuture<String> completableFuture2 = completableFuture.thenCombine(completableFuture1, (r1,r2) -> "用户 " +  r1 + "商品 " + r2);
 
-        String s1 = getProductInfoAsync(1).get();
-
-        System.out.println(s1);
-
-        double discount = calculateDiscountAsync(1,1).get();
-
-        System.out.println("折扣 "+ discount);
-
-        String orderResult = createOrderAsync(s,s1,discount).get();
-
-        System.out.println(orderResult);
-
-        long end = System.currentTimeMillis() - start;
-
-        System.out.println("总耗时 " + end);
+        System.out.println(completableFuture2.get());
     }
 }
