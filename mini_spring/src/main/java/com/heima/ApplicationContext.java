@@ -3,7 +3,6 @@ package com.heima;
 import com.heima.annotation.Component;
 
 import java.io.File;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
