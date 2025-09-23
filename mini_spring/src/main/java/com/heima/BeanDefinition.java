@@ -6,7 +6,6 @@ import com.heima.annotation.Component;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,10 +20,6 @@ public class BeanDefinition {
 
     public String getName() {
         return name;
-    }
-
-    public BeanDefinition(String name) {
-        this.name = name;
     }
 
     public Constructor<?> getConstructor() {
