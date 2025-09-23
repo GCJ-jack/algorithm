@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ApplicationContext {
 
@@ -29,6 +30,13 @@ public class ApplicationContext {
 
     public void initContext(String packageName) throws Exception{
         scanPackage(packageName);
+    }
+
+    private void initBeanPostProcessor(){
+        beanDefinitionMap.values().stream()
+                .filter(bd -> BeanPostProcessor.class.isAssignableFrom(bd.getBeanType()))
+                .map(BeanPostProcessor.class::cast)
+                .forEach(beanPostProcessors::add);
     }
 
 
@@ -73,24 +81,7 @@ public class ApplicationContext {
         return beanDefinition;
     }
 
-    protected Object getBean(Class<?> beanDefinition){
-        String name = beanDefinition.getName();
 
-        if(ioc.containsKey(name)){
-            return ioc.get(name);
-        }
-
-        Object bean = this.ioc.get(name);
-
-        if(bean != null){
-            return bean;
-        }
-
-        if (beanDefinitionMap.containsKey(name)) {
-            return createBean(beanDefinitionMap.get(name));
-        }
-        return null;
-    }
 
     protected Object createBean(BeanDefinition beanDefinition){
         String name = beanDefinition.getName();
@@ -155,7 +146,37 @@ public class ApplicationContext {
         }
     }
 
+    public Object getBean(String name) {
+        if (name == null) {
+            return null;
+        }
+        Object bean = this.ioc.get(name);
+        if (bean != null) {
+            return bean;
+        }
+        if (beanDefinitionMap.containsKey(name)) {
+            return createBean(beanDefinitionMap.get(name));
+        }
+        return null;
+    }
 
+    public <T> T getBean(Class<T> beanType) {
+        String beanName = this.beanDefinitionMap.values().stream()
+                .filter(bd -> beanType.isAssignableFrom(bd.getBeanType()))
+                .map(BeanDefinition::getName)
+                .findFirst()
+                .orElse(null);
+        return (T) getBean(beanName);
+    }
+
+    public <T> List<T> getBeans(Class<T> beanType) {
+        return this.beanDefinitionMap.values().stream()
+                .filter(bd -> beanType.isAssignableFrom(bd.getBeanType()))
+                .map(BeanDefinition::getName)
+                .map(this::getBean)
+                .map((bean) -> (T) bean)
+                .collect(Collectors.toList());
+    }
 
 
 
