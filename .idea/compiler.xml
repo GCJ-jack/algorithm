@@ -10,10 +10,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="exercise" />
-        <module name="module1" />
         <module name="Consumer" />
         <module name="buffer-pool-demo" />
+        <module name="exercise" />
+        <module name="mini_spring" />
+        <module name="module1" />
         <module name="module3" />
         <module name="module2" />
       </profile>
