@@ -9,21 +9,21 @@ public class Dungeon3D {
     private static final int[] dy = {0, 0, -1, 1, 0, 0};  // 左右
     private static final int[] dz = {0, 0, 0, 0, -1, 1};  // 深度（前后）
 
-    public static int bfs(char[][][] dungeon, int startX, int startY, int startZ, int endX, int endY, int endZ, int L, int R, int C){
+    public static int bfs(char[][][] dungeon, int startX, int startY, int startZ, int endX, int endY, int endZ, int L, int R, int C) {
         //创建visited 存储遍历过的
         boolean[][][] visited = new boolean[L][R][C];
         //创建队列
         Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{startX,startY,startZ,0});
+        queue.offer(new int[]{startX, startY, startZ, 0});
         visited[startX][startY][startZ] = true;
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int[] current = queue.poll();
             int x = current[0];
             int y = current[1];
             int z = current[2];
             int minutes = current[3];
 
-            if(x == endX && y == endY && z == endX){
+            if (x == endX && y == endY && z == endZ) {
                 return minutes;
             }
 
@@ -33,11 +33,13 @@ public class Dungeon3D {
                 int ny = y + dy[i];
                 int nz = z + dz[i];
                 if (nx >= 0 && nx < L && ny >= 0 && ny < R && nz >= 0 && nz < C && !visited[nx][ny][nz]) {
-                    visited[nx][ny][nz] = true;
-                    queue.offer(new int[]{nx,ny,nz,minutes+1});
+                    if (dungeon[nx][ny][nz] != '#' && dungeon[nx][ny][nz] != 'S') {
+                        visited[nx][ny][nz] = true;
+                        queue.offer(new int[]{nx, ny, nz, minutes + 1});
+                    }
                 }
-            }
 
+            }
         }
         return -1;
     }
@@ -82,7 +84,7 @@ public class Dungeon3D {
                     }
                 }
             }
-            String nextLine = scanner.nextLine();
+            if (i < level - 1) scanner.nextLine();
         }
 
         int result = bfs(dungeon,startX,startY,startZ,endX,endY,endZ,level,rows,columns);
