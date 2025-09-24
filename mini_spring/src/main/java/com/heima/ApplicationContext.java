@@ -27,14 +27,20 @@ public class ApplicationContext {
 
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
+    public ApplicationContext(String name) throws Exception {
+        initContext(name);
+    }
 
     public void initContext(String packageName) throws Exception{
-        scanPackage(packageName);
+        scanPackage(packageName).stream().filter(this::canCreate).forEach(this::wrapper);
+        initBeanPostProcessor();
+        beanDefinitionMap.values().forEach(this::createBean);
     }
 
     private void initBeanPostProcessor(){
         beanDefinitionMap.values().stream()
                 .filter(bd -> BeanPostProcessor.class.isAssignableFrom(bd.getBeanType()))
+                .map(this::createBean)
                 .map(BeanPostProcessor.class::cast)
                 .forEach(beanPostProcessors::add);
     }
@@ -42,18 +48,23 @@ public class ApplicationContext {
 
     private List<Class<?>> scanPackage(String packageName) throws Exception{
         List<Class<?>> classList  = new ArrayList<>();
-        URL resource = this.getClass().getClassLoader().getResource(packageName.replace(File.separator,"."));
+        System.out.println("this is packagename " + packageName);
+        URL resource = this.getClass().getClassLoader().getResource(packageName.replace(".",File.separator));
+        System.out.println("this is url " + resource.toString());
 
         Path path = Path.of(resource.toURI());
-
+        System.out.println("this is the path "  + path);
         Files.walkFileTree(path, new SimpleFileVisitor<>(){
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                 Path absolutePath = file.toAbsolutePath();
+                System.out.println("walking tree absolute path" + absolutePath);
                 if (absolutePath.toString().endsWith(".class")) {
                     String replaceStr = absolutePath.toString().replace(File.separator, ".");
                     int packageIndex = replaceStr.indexOf(packageName);
+
                     String className = replaceStr.substring(packageIndex, replaceStr.length() - ".class".length());
+                    System.out.println("class name " + className );
                     try {
                         classList.add(Class.forName(className));
                     } catch (ClassNotFoundException e) {
