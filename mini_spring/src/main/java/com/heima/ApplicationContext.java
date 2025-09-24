@@ -1,7 +1,6 @@
 package com.heima;
 
 import com.heima.annotation.Component;
-import com.heima.annotation.PostConstruct;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -188,7 +187,5 @@ public class ApplicationContext {
                 .map((bean) -> (T) bean)
                 .collect(Collectors.toList());
     }
-
-
 
 }
