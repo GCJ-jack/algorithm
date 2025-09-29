@@ -1,10 +1,7 @@
 package com.heima.controller;
 
 
-import com.heima.impl.NormalCustomerService;
-import com.heima.impl.PersonalCustomerService;
-import com.heima.impl.SmallRCustomerService;
-import com.heima.impl.SuperRCustomerService;
+import com.heima.impl.*;
 import com.heima.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +37,6 @@ public class CustomerController {
             return new SuperRCustomerService().findCustomer();
         }
 
-        return "用户的充值额度出现异常";
+        return new DefaultCustomerService().findCustomer();
     }
 }
