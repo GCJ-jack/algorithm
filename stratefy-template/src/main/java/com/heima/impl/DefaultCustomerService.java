@@ -1,5 +1,6 @@
 package com.heima.impl;
 
+import com.heima.enums.UserType;
 import com.heima.service.CustomerService;
 import org.springframework.stereotype.Component;
 
@@ -8,8 +9,8 @@ public class DefaultCustomerService implements CustomerService {
 
 
     @Override
-    public boolean support(int recharge) {
-        return true;
+    public UserType support() {
+        return null;
     }
 
     @Override

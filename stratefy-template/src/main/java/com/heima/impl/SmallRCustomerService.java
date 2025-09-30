@@ -1,5 +1,6 @@
 package com.heima.impl;
 
+import com.heima.enums.UserType;
 import com.heima.service.CustomerService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class SmallRCustomerService implements CustomerService {
 
     @Override
-    public boolean support(int recharge) {
-        return recharge > 100 && recharge <= 200;
+    public UserType support() {
+        return UserType.SMALL;
     }
 
     @Override
