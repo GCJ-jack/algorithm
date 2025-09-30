@@ -28,12 +28,11 @@ public class CustomerController {
     public String customer(@PathVariable(value = "recharge") int recharge){
         //分为普通用户 定制用户 尊享用户 至尊用户
 
-        for(CustomerService customerService:customerServiceList){
-            if(customerService.support(recharge)){
-                return customerService.findCustomer();
-            }
-        }
-        return "can't find any customer";
+        UserType userType = UserType.typeOf(recharge);
+
+        CustomerService customerService = serviceMap.getOrDefault(userType,defaultCustomerService);
+
+        return customerService.findCustomer();
     }
 
     @Autowired
