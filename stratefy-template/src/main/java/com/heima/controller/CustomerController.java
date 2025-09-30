@@ -1,6 +1,7 @@
 package com.heima.controller;
 
 
+import com.heima.annotations.SupportUserType;
 import com.heima.enums.UserType;
 import com.heima.impl.*;
 import com.heima.service.CustomerService;
@@ -38,9 +39,18 @@ public class CustomerController {
     @Autowired
     public void setCustomerServiceMap(List<CustomerService> list){
         serviceMap = list.stream()
-                .filter(customerService -> customerService.support()!=null)
+                .filter(customerService -> customerService.getClass().isAnnotationPresent(SupportUserType.class))
                 .collect(Collectors.toMap(CustomerService::support, Function.identity()));
 
+        if(this.serviceMap.size() != UserType.values().length){
+            throw new IllegalArgumentException("有用户类型没有对应的策略");
+        }
+
+    }
+
+    public UserType findUserTypeFromService(CustomerService customerService){
+        SupportUserType supportUserType = customerService.getClass().getAnnotation(SupportUserType.class);
+        return supportUserType.value();
     }
 
 
