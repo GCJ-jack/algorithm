@@ -1,13 +1,13 @@
 package com.heima.impl;
 
+import com.heima.annotations.SupportUserType;
 import com.heima.enums.UserType;
 import com.heima.service.CustomerService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(1)
-
+@SupportUserType(UserType.PERSONAL)
 public class PersonalCustomerService implements CustomerService {
 
     @Override
