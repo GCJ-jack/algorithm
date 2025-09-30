@@ -8,6 +8,11 @@ public class DefaultCustomerService implements CustomerService {
 
 
     @Override
+    public boolean support(int recharge) {
+        return true;
+    }
+
+    @Override
     public String findCustomer() {
         return "找不到客服";
     }

@@ -21,22 +21,11 @@ public class CustomerController {
     public String customer(@PathVariable(value = "recharge") int recharge){
         //分为普通用户 定制用户 尊享用户 至尊用户
 
-        if(recharge >= 0 && recharge <= 50){
-            return new NormalCustomerService().findCustomer();
+        for(CustomerService customerService:customerServiceList){
+            if(customerService.support(recharge)){
+                return customerService.findCustomer();
+            }
         }
-
-        if(recharge > 50 && recharge <= 100){
-            return new PersonalCustomerService().findCustomer();
-        }
-
-        if(recharge > 100 && recharge <= 200){
-            return new SmallRCustomerService().findCustomer();
-        }
-
-        if(recharge > 200){
-            return new SuperRCustomerService().findCustomer();
-        }
-
-        return new DefaultCustomerService().findCustomer();
+        return "can't find any customer";
     }
 }
