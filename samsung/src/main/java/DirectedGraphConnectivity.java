@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class DirectedGraphConnectivity {
 
@@ -14,6 +11,21 @@ public class DirectedGraphConnectivity {
 
         for(int node:adjList.get(cur)){
             dfs(visited,node);
+        }
+    }
+
+    public static void bfs(boolean[] visited, int cur){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(cur);
+        visited[cur] = true;
+        while (!queue.isEmpty()){
+            int node = queue.poll();
+            for(int nextNode:adjList.get(node)){
+                if(!visited[nextNode]){
+                    queue.add(nextNode);
+                    visited[nextNode] = true;
+                }
+            }
         }
     }
 
@@ -39,11 +51,13 @@ public class DirectedGraphConnectivity {
             adjList.get(node1 - 1).add(node2 - 1);
         }
 
-        dfs(visited,0);
+//        dfs(visited,0);
+        bfs(visited,0);
 
         for (int i = 0; i < n; i++) {
             if(!visited[i]){
                 System.out.println(-1);
+                return;
             }
         }
 
