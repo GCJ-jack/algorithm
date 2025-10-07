@@ -33,21 +33,23 @@ public class AdavancedDijkstra {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        //输入的节点
+
         int m = scanner.nextInt();
         int n = scanner.nextInt();
 
-        int[] minDist= new int[m + 1];
+        boolean[] visited = new boolean[m + 1];
 
-        Arrays.fill(minDist,Integer.MAX_VALUE);
-
-        List<List<EdgeA>> edgeList = new ArrayList<>();
+        List<List<EdgeA>> edgeList = new ArrayList<>(m + 1);
 
         for (int i = 0; i <= m; i++) {
             edgeList.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < n; i++) {
+        int[] minDist = new int[m + 1];
+
+        Arrays.fill(minDist,Integer.MAX_VALUE);
+
+        for (int i = 0; i < n; i++) { // ✅ 读 n 条边
             int node1 = scanner.nextInt();
             int node2 = scanner.nextInt();
             int val = scanner.nextInt();
@@ -58,37 +60,35 @@ public class AdavancedDijkstra {
         int start = 1;
         int end = m;
 
-        boolean[] visited = new boolean[n + 1];
-
         PriorityQueue<Pair<Integer,Integer>> queue = new PriorityQueue<>(new MyComparison());
+
 
         queue.add(new Pair<>(start,0));
 
         minDist[start] = 0;
 
         while (!queue.isEmpty()){
+            Pair<Integer,Integer> cur = queue.poll();
 
-            Pair<Integer, Integer> cur = queue.poll();
-
-            if(visited[(int) cur.first]){
+            if(visited[cur.first]){
                 continue;
             }
 
             visited[cur.first] = true;
 
-            for(EdgeA edgeA:edgeList.get(cur.first)){
-                if(!visited[edgeA.to] && minDist[cur.first] + edgeA.val < minDist[edgeA.to]){
-                    minDist[edgeA.to] = minDist[cur.first] + edgeA.val;
-                    queue.add(new Pair<>(edgeA.to, minDist[edgeA.to]));
+            for(EdgeA edge:edgeList.get(cur.first)){
+                if(!visited[edge.to]&& edge.val + minDist[cur.first] < minDist[edge.to]){
+                    minDist[edge.to] = minDist[cur.first] + edge.val;
+                    queue.add(new Pair<>(edge.to, minDist[edge.to]));
 
                 }
             }
         }
 
-        if (minDist[end] == Integer.MAX_VALUE) {
-            System.out.println(-1); // 不能到达终点
-        } else {
-            System.out.println(minDist[end]); // 到达终点最短路径
+        if(minDist[end] == Integer.MAX_VALUE){
+            System.out.println(-1);
+        }else{
+            System.out.println(minDist[end]);
         }
     }
 }
