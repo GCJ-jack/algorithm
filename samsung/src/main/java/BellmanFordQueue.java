@@ -17,7 +17,7 @@ public class BellmanFordQueue {
 
         List<List<Edge>> edgelist = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             edgelist.add(new ArrayList<>());
         }
 
