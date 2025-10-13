@@ -11,7 +11,7 @@ public class LengthValidatorHandler implements ValidatorHandler{
     public void validate(Object value, ValidatorContext validatorContext) {
         if(value instanceof String stringvalue){
             if(stringvalue.length() != length){
-                validatorContext.
+                validatorContext.appendError("你的字符串长度是" + stringvalue.length() + "应该是" + length);
             }
         }
     }

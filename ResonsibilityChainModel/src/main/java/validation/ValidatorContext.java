@@ -1,13 +1,17 @@
 package validation;
 
-import annotation.Max;
 import exception.ValidatorException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Slf4j
+@Getter
+@Setter
 public class ValidatorContext {
 
     private final List<String> errorList = new ArrayList<>();
@@ -18,7 +22,7 @@ public class ValidatorContext {
 
     private Object value;
 
-    private Map<String,Object> data = new HashMap<>();
+    private Map<String,Object> date = new HashMap<>();
 
     public ValidatorContext(Object value){
         this.value = value;
@@ -37,25 +41,20 @@ public class ValidatorContext {
         this.value = value;
     }
 
-    public Object getValue() {
-        return value;
-    }
-
     public int currentIndex() {
         return index;
     }
-
 
     public boolean shouldStop() {
         return this.stop;
     }
 
     public void put(String key, Object value) {
-        this.data.put(key, value);
+        this.date.put(key, value);
     }
 
     public Object get(String key) {
-        return this.data.get(key);
+        return this.date.get(key);
     }
 
     public void throwExceptionIfNecessary() throws ValidatorException {
