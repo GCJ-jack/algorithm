@@ -10,7 +10,7 @@ public class LengthValidatorHandler implements ValidatorHandler{
     @Override
     public void validate(Object value, ValidatorContext validatorContext) {
         if(value instanceof String stringvalue){
-            if(stringvalue.length() != length){
+            if(stringvalue.length()!= length){
                 validatorContext.appendError("你的字符串长度是" + stringvalue.length() + "应该是" + length);
             }
         }
