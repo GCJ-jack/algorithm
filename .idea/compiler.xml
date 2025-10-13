@@ -4,6 +4,7 @@
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/Consumer/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/samsung/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/ResonsibilityChainModel/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -18,6 +19,7 @@
         <module name="exercise" />
         <module name="mini_spring" />
         <module name="module1" />
+        <module name="ResonsibilityChainModel" />
         <module name="module3" />
         <module name="module2" />
       </profile>
