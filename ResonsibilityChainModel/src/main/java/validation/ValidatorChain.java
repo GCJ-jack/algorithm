@@ -4,7 +4,6 @@ import exception.ValidatorException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 public class ValidatorChain {
 
