@@ -1,17 +1,18 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TVStation {
 
-    private final List<User> users = new ArrayList<>();
+    private Map<Class <? extends Event>, List<EventListener>> listenerMap = new HashMap<>();
 
-    public void subscribe(User user){
-        users.add(user);
+    public void subscribe(EventListener listener, Class<? extends Event> eventClass){
+        listenerMap.computeIfAbsent(eventClass,k -> new ArrayList<>()).add(listener);
     }
 
-    public void onInfoUpdate(String info){
-        for(User user:users){
-            user.ReceiveInfo(info);
+    public void publish(Event event){
+        Class<? extends Event> aClass = event.getClass();
+        List<EventListener> eventListeners = listenerMap.get(aClass);
+        if(eventListeners != null){
+            eventListeners.forEach(listener -> listener.onEvent(event));
         }
     }
 }
