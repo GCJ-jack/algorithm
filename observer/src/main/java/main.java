@@ -20,8 +20,8 @@ public class main {
             }
         });
 
-        tvStation.subscribe(tom);
-        tvStation.subscribe(jerry);
+        tvStation.subscribe(tom,WeatherUpdateEvent.class);
+        tvStation.subscribe(jerry,WeatherUpdateEvent.class);
 
         weatherStation.start();
     }

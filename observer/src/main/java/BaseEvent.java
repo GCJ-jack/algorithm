@@ -1,13 +1,13 @@
 public abstract class BaseEvent implements Event{
 
-    private long timeStamp;
+    private final long timeStamp;
 
     protected BaseEvent(){
         timeStamp = System.currentTimeMillis();
     }
 
     @Override
-    public long timestamp() {
+    public long timeStamp() {
         return timeStamp;
     }
 }
