@@ -123,16 +123,27 @@ public class Main {
 //        System.out.println(upsideDownDigit(666));     // 966
 //        System.out.println(upsideDownDigit(969969));  // 999969
 
-        System.out.println(robotMovement("UD"));           // true  → 上一步、下一步
-        System.out.println(robotMovement("LL"));           // false → 向左两步没回来
-        System.out.println(robotMovement("UDLR"));         // true  → 四个方向抵消
-        System.out.println(robotMovement("UUDDLRLR"));     // true  → 上下左右抵消
-        System.out.println(robotMovement("UUUDDD"));       // true  → 三上三下
-        System.out.println(robotMovement("UUUDD"));        // false → (0,1)
-        System.out.println(robotMovement("UDUDUD"));       // true  → 多次抵消
-        System.out.println(robotMovement("LRLRLRR"));      // false → 向右多一步
-        System.out.println(robotMovement("U"));            // false → 只上一步
-        System.out.println(robotMovement("UDLRUDLRUDLR")); // true  → 多次重复也回原点
+//        System.out.println(robotMovement("UD"));           // true  → 上一步、下一步
+//        System.out.println(robotMovement("LL"));           // false → 向左两步没回来
+//        System.out.println(robotMovement("UDLR"));         // true  → 四个方向抵消
+//        System.out.println(robotMovement("UUDDLRLR"));     // true  → 上下左右抵消
+//        System.out.println(robotMovement("UUUDDD"));       // true  → 三上三下
+//        System.out.println(robotMovement("UUUDD"));        // false → (0,1)
+//        System.out.println(robotMovement("UDUDUD"));       // true  → 多次抵消
+//        System.out.println(robotMovement("LRLRLRR"));      // false → 向右多一步
+//        System.out.println(robotMovement("U"));            // false → 只上一步
+//        System.out.println(robotMovement("UDLRUDLRUDLR")); // true  → 多次重复也回原点
+
+        String[] tests = {
+                "?1-31", "02-??", "??-47", "09-31", "??-??",
+                "1?-??", "?0-??", "0?-31", "04-?0", "11-?9",
+                "06-?8", "02-3?", "10-?5", "12-?1", "03-?9",
+                "07-?0", "02-?9", "1?-?1", "0?-0?", "11-11"
+        };
+
+        for (String t : tests) {
+            System.out.println(t + "  →  " + latestValidDate(t));
+        }
 
     }
 }
