@@ -16,6 +16,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="stratefy-template" />
+        <module name="dubbo-apii" />
         <module name="buffer-pool-demo" />
         <module name="dubbo-server" />
         <module name="exercise" />
@@ -32,12 +33,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
+      <module name="dubbo-api" target="1.8" />
       <module name="untitled" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ResonsibilityChainModel" options="-parameters" />
+      <module name="dubbo-apii" options="-parameters" />
     </option>
   </component>
 </project>
