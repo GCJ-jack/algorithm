@@ -1,10 +1,18 @@
 package com.heima.service;
 
 import com.heima.model.User;
+import org.apache.dubbo.config.annotation.DubboService;
 
-public class UserServiceImpl implements UserService{
+@DubboService
+public class UserServiceImpl implements UserService {
     @Override
     public User getUser(int id) {
-        return null;
+
+        System.out.println("using dubbo service");
+        return User.builder()
+                .id(1L)
+                .name("junjun")
+                .age(23)
+                .build();
     }
 }

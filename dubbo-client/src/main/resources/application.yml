@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: dubbo-client
+
+dubbo:
+  application:
+    name: dubbo-client
+  registry:
+    address: N/A  # 不使用注册中心，直连
+  consumer:
+    check: false
