@@ -16,6 +16,10 @@
         <option value="$PROJECT_DIR$/ResonsibilityChainModel/pom.xml" />
         <option value="$PROJECT_DIR$/observer/pom.xml" />
         <option value="$PROJECT_DIR$/hsbc/pom.xml" />
+        <option value="$PROJECT_DIR$/untitled/pom.xml" />
+        <option value="$PROJECT_DIR$/dubbo-server/pom.xml" />
+        <option value="$PROJECT_DIR$/dubbo-client/pom.xml" />
+        <option value="$PROJECT_DIR$/dubbo-api/pom.xml" />
       </list>
     </option>
   </component>

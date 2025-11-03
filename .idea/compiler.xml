@@ -7,6 +7,7 @@
       <directory url="file://$PROJECT_DIR$/ResonsibilityChainModel/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/observer/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/hsbc/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/untitled/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -15,20 +16,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="stratefy-template" />
+        <module name="buffer-pool-demo" />
+        <module name="dubbo-server" />
+        <module name="exercise" />
+        <module name="module1" />
+        <module name="module3" />
+        <module name="module2" />
         <module name="observer" />
         <module name="samsung" />
         <module name="Consumer" />
-        <module name="buffer-pool-demo" />
-        <module name="exercise" />
         <module name="mini_spring" />
-        <module name="module1" />
         <module name="ResonsibilityChainModel" />
         <module name="hsbc" />
-        <module name="module3" />
-        <module name="module2" />
+        <module name="dubbo-client" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="untitled" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
