@@ -1,0 +1,17 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: dubbo-server
+
+# application.yml
+dubbo:
+  application:
+    name: dubbo-server
+  protocol:
+    name: dubbo
+    port: 20880
+    serialization: hessian2  # 改为 hessian2，兼容性更好
+  registry:
+    address: N/A  # 明确指定不走注册中心

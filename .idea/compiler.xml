@@ -40,7 +40,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ResonsibilityChainModel" options="-parameters" />
-      <module name="dubbo-apii" options="-parameters" />
+      <module name="dubbo-apii" options="" />
+      <module name="dubbo-client" options="-parameters" />
+      <module name="dubbo-server" options="-parameters" />
     </option>
   </component>
 </project>

@@ -3,7 +3,7 @@ package com.heima.service;
 import com.heima.model.User;
 import org.apache.dubbo.config.annotation.DubboService;
 
-@DubboService
+@DubboService(interfaceClass = UserService.class, version = "1.0.0")
 public class UserServiceImpl implements UserService {
     @Override
     public User getUser(int id) {
