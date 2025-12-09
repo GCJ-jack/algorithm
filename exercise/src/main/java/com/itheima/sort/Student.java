@@ -1,5 +1,7 @@
 package com.itheima.sort;
 
+import java.util.Comparator;
+
 public class Student implements Comparable<Student> {
 
     private String name;
@@ -41,8 +43,11 @@ public class Student implements Comparable<Student> {
     //定义比较规则
     @Override
     public int compareTo(Student o) {
+        if(this.age != o.age){
+            return this.age - o.age;
+        }
 
-        return this.age - o.age;
+        return this.name.compareTo(o.name);
     }
 
 
