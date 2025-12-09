@@ -4,6 +4,7 @@ import javax.xml.transform.Source;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class CollectionTest {
 
@@ -60,5 +61,42 @@ public class CollectionTest {
         Collections.sort(students);
 
         students.forEach(System.out::println);
+
+        ArrayList<String> stringsList =  new ArrayList<>();
+
+
+
+        String[] words = {
+                "apple", "Banana", "CHERRY", "date",
+                "ELEPHANT", "fig", "Grape", "HORSE",
+                "ice", "JACKET", "kite", "LION",
+                "Moon", "NIGHT", "orange", "Pencil",
+                "Queen", "rabbit", "SUN", "Tiger"
+        };
+
+        Collections.addAll(stringsList, words);
+
+        Collections.sort(stringsList, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                char char1 = o1.charAt(0);
+                char char2 = o2.charAt(0);
+
+                boolean c1IsCapital = Character.isUpperCase(char1);
+                boolean c2IsCaptial = Character.isUpperCase(char2);
+
+                if(c1IsCapital&&!c2IsCaptial){
+                    return 1;
+                }
+
+                if(c2IsCaptial&&!c1IsCapital){
+                    return -1;
+                }
+
+                return o1.compareTo(o2);
+            }
+        });
+
+        stringsList.forEach(System.out::println);
     }
 }
