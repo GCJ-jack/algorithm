@@ -8,6 +8,7 @@
       <directory url="file://$PROJECT_DIR$/observer/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/hsbc/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/untitled/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/kafka-practice/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -22,12 +23,14 @@
         <module name="exercise" />
         <module name="module1" />
         <module name="module3" />
+        <module name="kafka-practice" />
         <module name="module2" />
         <module name="observer" />
         <module name="samsung" />
         <module name="Consumer" />
         <module name="mini_spring" />
         <module name="ResonsibilityChainModel" />
+        <module name="kafka-exercise" />
         <module name="hsbc" />
         <module name="dubbo-client" />
       </profile>
@@ -43,6 +46,7 @@
       <module name="dubbo-apii" options="" />
       <module name="dubbo-client" options="-parameters" />
       <module name="dubbo-server" options="-parameters" />
+      <module name="kafka-exercise" options="-parameters" />
     </option>
   </component>
 </project>
