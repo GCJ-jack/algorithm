@@ -2,7 +2,7 @@ package com.chaojun.Consumer;
 
 import com.alibaba.fastjson2.JSON;
 import com.chaojun.DTO.Order;
-import com.chaojun.service.OrderService;
+import com.chaojun.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

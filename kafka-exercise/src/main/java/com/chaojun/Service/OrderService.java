@@ -1,4 +1,4 @@
-package com.chaojun.service;
+package com.chaojun.Service;
 
 import com.chaojun.DTO.Order;
 import com.chaojun.Mapper.OrderMapper;
