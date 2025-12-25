@@ -17,7 +17,6 @@ public class WordDistance {
 
     public int shortest(String word1, String word2) {
 
-
         List<Integer> a = map.get(word1);
         List<Integer> b = map.get(word2);
 
@@ -26,7 +25,8 @@ public class WordDistance {
 
         int ans = Integer.MAX_VALUE;
 
-        while (i < a.size() && j < b.size()) {
+        while (i < a.size() && j < b.size()){
+
             int idx1 = a.get(i);
             int idx2 = b.get(j);
 
