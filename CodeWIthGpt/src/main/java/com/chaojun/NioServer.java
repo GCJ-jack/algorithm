@@ -2,13 +2,11 @@ package com.chaojun;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.security.Key;
 import java.util.Iterator;
 
 public class NioServer {
@@ -28,7 +26,7 @@ public class NioServer {
 
         while (true){
             selector.select();
-            Iterator<SelectionKey> iterator = selector.keys().iterator();
+            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
 
             while (iterator.hasNext()){
                 SelectionKey selectionKey = iterator.next();
@@ -47,7 +45,7 @@ public class NioServer {
                     SocketChannel client = (SocketChannel) selectionKey.channel();
                     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
-                    if(client.read(byteBuffer) != -1){
+                    if(client.read(byteBuffer) == -1){
                         System.out.println(client.getRemoteAddress() + " 断开连接了");
                         client.close();
                     }else{
