@@ -21,7 +21,12 @@ public class TaskOne {
         for (int i = 0; i < 1000; i++) {
             executorService.submit(()->{
 //                count.incrementAndGet();
-                synchronized (key){
+//                synchronized (key){
+//                    count++;
+//                }
+
+                //更加常用的方案 可以锁住当先类的对象
+                synchronized (TaskOne.class){
                     count++;
                 }
             });
