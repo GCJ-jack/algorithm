@@ -33,6 +33,7 @@
         <module name="kafka-exercise" />
         <module name="hsbc" />
         <module name="dubbo-client" />
+        <module name="CodeWIthGpt" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
