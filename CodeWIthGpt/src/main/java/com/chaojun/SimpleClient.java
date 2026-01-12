@@ -8,7 +8,7 @@ public class SimpleClient {
 
     public static void main(String[] args) throws IOException {
 
-        Socket socket = new Socket("localhost",8080);
+        Socket socket = new Socket("localhost",8083);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
